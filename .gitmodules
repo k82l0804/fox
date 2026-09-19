@@ -1,0 +1,9 @@
+[submodule "fox-code-cli"]
+	path = fox-code-cli
+	url = https://github.com/k82l0804/fox-code-cli.git
+[submodule "fox-acp-client"]
+	path = fox-acp-client
+	url = https://github.com/k82l0804/fox-acp-client.git
+[submodule "openai-proxy"]
+	path = openai-proxy
+	url = https://github.com/k82l0804/openai-proxy.git
