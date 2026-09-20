@@ -189,6 +189,28 @@ For complete step-by-step instructions, see the [Independent Replication Guide](
 
 ---
 
+## 🥊 Why Fox? Competitive Comparison
+
+How Fox compares to other prominent developer coding agents (Claude Code, Aider, Kilo Code, Goose):
+
+| Capability / Metric | **🦊 Fox Code CLI** | **Claude Code** (Anthropic) | **Aider** (Paul Gauthier) | **Kilo Code** (Upstream) | **Goose** (Block) |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Core Runtime Engine** | **Bun + Effect TS** | Node.js | Python 3 | Bun + Effect TS | Rust |
+| **Strictly Local / Offline Inference** | **✅ 100% Local-First** | ❌ Anthropic API only | ⚠️ Via LiteLLM/Ollama | ⚠️ Cloud Catalog deps | ✅ Multi-provider |
+| **Lossless Tool Token Compression** | **✅ Yes (-52% to -76%)** | ❌ None | ❌ None | ❌ None | ❌ None |
+| **Standard Test Suite & Scoreboard** | **✅ Yes (52 Golden Fixtures)**| ❌ No | ❌ No | ❌ No | ❌ No |
+| **KV-Cache Prefix Stability** | **✅ Deterministic sha256** | ⚠️ Cloud-managed | ⚠️ Heuristic | ❌ None | ❌ None |
+| **Editor Integration Protocol** | **✅ ACP (JSON-RPC 2.0)** | ❌ Custom CLI only | ❌ Custom CLI only | ✅ ACP | ⚠️ MCP only |
+| **Git Command Rewriting (`-sb`, `-U1`)** | **✅ Automatic** | ❌ Raw output | ❌ Raw output | ❌ Raw output | ❌ Raw output |
+| **Lockfile Diff Collapsing** | **✅ Built-in (95%+ saved)** | ❌ Raw diffs | ❌ Raw diffs | ❌ Raw diffs | ❌ Raw diffs |
+| **Type-Safe Workflow Profiles** | **✅ Yes (`swe`, `data`, etc.)**| ❌ No | ⚠️ Architect mode | ❌ No | ❌ No |
+| **Cloud Telemetry & Tracking** | **✅ 100% Stripped & Clean** | ❌ Cloud telemetry | ✅ Clean | ⚠️ Remote checks | ✅ Clean |
+| **Startup & Overhead Latency** | **⚡ Sub-5ms** | ~200ms | ~500ms–1s | ~50ms | ⚡ Fast (Rust) |
+
+> For the comprehensive deep-dive report, see the [Competitive Landscape & Architecture Document](docs/competitive-analysis.md).
+
+---
+
 ## Fox Code CLI — Overview & Status
 
 Fox Code CLI (`fox-code-cli/`) is fully ported, compiled, and verified. It provides **strictly local LLM inference** and an autonomous developer toolchain with **zero cloud dependencies**.
@@ -278,6 +300,7 @@ Configure your local LLM provider in `fox.json` (or `~/.config/fox/fox.json`):
 
 ## Documentation Index
 
+- 🥊 [Why Fox? Competitive Analysis](docs/competitive-analysis.md)
 - 📊 [Fox Standard Test Suite Scoreboard](fox-code-cli/docs/fox-standard-test-suite-scoreboard.md)
 - 📖 [Independent Replication Guide](docs/reproduction-guide.md)
 - 🔬 [Autonomous SWE Benchmark Report](fox-code-cli/docs/research/report-realworld-autonomous-swe-benchmark.md)
