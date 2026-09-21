@@ -2,6 +2,7 @@
 
 > **Document Version:** 1.0.0  
 > **Topic:** AI Coding Agent CLI Architectural & Performance Benchmark Comparison  
+> **Future Capabilities Plan:** [`../fox-code-cli/docs/future/plan-competitive-features-roadmap.md`](../fox-code-cli/docs/future/plan-competitive-features-roadmap.md)  
 > **Target Audience:** Developers, Enterprise Teams, AI Researchers, and Open-Source Contributors
 
 ---
