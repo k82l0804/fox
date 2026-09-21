@@ -2,30 +2,85 @@
 
 ## MANDATORY: Run Tests During Refactoring
 
-When creating implementation plans that involve refactoring or adding features to `fox-code-cli`, you MUST include a verification step that runs the appropriate tests. Use the category-specific commands to match the area being changed.
+When creating implementation plans or making code changes to `fox-code-cli`, you MUST include verification steps that run the appropriate tests according to the **5-Tier Testing Hierarchy**.
 
-## Test Commands (all run inside `fox-code-cli/`)
+---
 
-### By Category
-| Area Being Changed | Command |
-|---|---|
-| Patch parser / apply_patch | `bun run test:patch` |
-| Edit tool / replacers / fuzzy matching | `bun run test:edit` |
-| Config merging / loading / precedence | `bun run test:config` |
-| All app-level tests | `bun run test:app` |
-| Any package in `packages/` | `cd packages/<name> && bun test --timeout 30000` |
+## 5-Tier Testing Hierarchy (All run inside `fox-code-cli/`)
 
-### Quick Smoke Test (after any change)
-```bash
-bun run test:smoke    # typecheck + patch + edit + config (~30s)
+```
+Tier 1: Targeted Module Test   (~200ms)  ──► On every edit / save
+Tier 2: Category Suite         (~1-2s)   ──► After editing a specific subsystem
+Tier 3: Quick Smoke            (~15s)    ──► Before staging (git add)
+Tier 4: App & Invariant Suite  (~2s)     ──► Pre-commit verification (all 29 suites + invariants)
+Tier 5: Full Monorepo + Build  (~45s)    ──► Before pushing or finishing a major plan
 ```
 
-### Full Suite (before committing or finishing a plan)
+### Tier 1 — Targeted Module Tests (~200ms)
+Fast, focused sub-second tests for rapid iteration:
 ```bash
-bun run test          # typecheck + all packages + app tests (~60s)
+# Session & Prompt Monolith Subsystems
+bun test test/session/prompt-loop.test.ts
+bun test test/session/prompt-shell.test.ts
+bun test test/session/prompt-command.test.ts
+bun test test/session/prompt-attachment.test.ts
+bun test test/session/prompt-orphan.test.ts
+bun test test/session/prompt-structured.test.ts
+
+# LLM Stream Adapter & Reducer
+bun test test/session/llm-adapter.test.ts
+bun test test/session/reducer.test.ts
+bun test test/session/subagent-data.test.ts
+bun test test/session/permission-flow.test.ts
+
+# Context, Compaction & Guardrails
+bun test test/session/compaction.test.ts
+bun test test/session/overflow.test.ts
+bun test test/session/doom-loop.test.ts
+
+# Subsystem & Schema Tests
+bun test test/foxcode/daemon-schema.test.ts
+bun test test/foxcode/background-process-schema.test.ts
+bun test test/foxcode/lsp-validate.test.ts
+bun test test/foxcode/goal-action.test.ts
+bun test test/tool/mcp-docker.test.ts
 ```
+
+### Tier 2 — Category Suites (~1–2s)
+Run when modifying specific functional areas:
+| Area Being Changed | Command | Typical Time |
+|---|---|:---:|
+| Patch parser / `apply_patch` | `bun run test:patch` | ~1s |
+| Edit tool / replacers / fuzzy matching | `bun run test:edit` | ~1s |
+| Config merging / loading / precedence | `bun run test:config` | ~1s |
+| Lossless tool token compression | `bun run test:compress` | ~1s |
+| Schema stability / wire formats | `bun run test:schema-stability` | ~1s |
+
+### Tier 3 — Quick Smoke Test (~15s)
+Run after code edits to verify TypeScript compilation and core invariants:
+```bash
+bun run test:smoke    # typecheck + patch + edit + config + compress (~15s)
+```
+
+### Tier 4 — App & Invariant Verification (~2s)
+Run before staging (`git add`) to guarantee zero regressions across all orchestration and agent components:
+```bash
+bun run test:app            # All 281 tests across 29 suites in test/ (~1s)
+bun run test:standard-suite # Fox Standard Test Suite (6 invariant categories, ~1s)
+```
+
+### Tier 5 — Full Monorepo Build & Package Tests (~45s)
+Run before committing or completing an implementation plan:
+```bash
+bun run test          # typecheck + all 6 internal packages + all app tests (~45s)
+bun run build         # Bundle production dist/ via bun build
+```
+
+---
 
 ## Per-Package Tests
+
+Run when changing code within `packages/*`:
 ```bash
 cd packages/fox-memory            && bun test --timeout 30000
 cd packages/sandbox               && bun test --timeout 30000
@@ -35,49 +90,26 @@ cd packages/tui                   && bun test --timeout 30000 --only-failures
 cd packages/core                  && bun test --timeout 30000
 ```
 
-## When to Run Tests During Development
-| Scenario | Command | Time |
-|---|---|---|
-| Refactoring patch/edit logic | `bun run test:patch` or `bun run test:edit` | ~1s |
-| Changing config system | `bun run test:config` | ~1s |
-| After any code change (quick check) | `bun run test:smoke` | ~30s |
-| Before committing | `bun run test` | ~60s |
-| Changing a specific package | `cd packages/<name> && bun test --timeout 30000` | varies |
-
-## Integration Into Plans
-
-Every implementation plan verification section MUST include:
-1. **Category tests** for the specific areas being modified
-2. **Smoke test** (`bun run test:smoke`) as a minimum baseline
-3. **Typecheck** (`bun run typecheck`) — always
-4. **Full test suite** (`bun run test`) at the end of multi-phase plans
-
-## Test File Locations
-
-- App-level tests: `fox-code-cli/test/` (patch, edit, config, bom, encoding)
-- Core package tests: `fox-code-cli/packages/core/test/`
-- Other package tests: `fox-code-cli/packages/<name>/test/`
+---
 
 ## Test Coverage Summary
-| Area | Tests | Coverage |
-|---|---|---|
-| App: patch parser & application | 30 | `parsePatch`, `deriveNewContentsFromChunks`, `maybeParseApplyPatch` |
-| App: edit tool replacers | 36 | All 8 replacer generators, `replace()`, `trimDiff`, `buildFileDiff` |
-| App: line endings & encoding | 12 | `normalizeLineEndings`, `detectLineEnding`, `convertToLineEnding`, `isDisproportionateMatch` |
-| App: config merge | 36 | `mergeConfig`, `stripNulls`, `unsetPaths`, `isConfigDir`, `mergeAgentMarkdown` |
-| App: BOM utility | 8 | `split`, `join` |
-| Core: tool system | 16 | `Tool.validateName`, `Tool.make`, `Tool.settle`, `Tool.withPermission` |
-| TUI (existing) | 274 | UI rendering, keymaps, prompts, sessions, diffs, plugins |
-| Memory (existing) | 167 | Indexing, recall, capture, decisions, text |
-| Sandbox (existing) | 61 | File system guards, network policies, context |
-| SQLite (existing) | 8 | Queries, transactions, migrations |
-| HTTP Recorder (existing) | 35 | Record/replay for test fixtures |
 
-## Testing Philosophy
-- **Test pure functions, not wiring.** The tests target parsers, replacers, mergers, and validators — where bugs live during refactoring.
-- **Typecheck catches structural regressions.** Effect service orchestration is validated by `bun run typecheck`.
-- **No tests yet for:** session/LLM layer, HTTP API server, MCP integration, plugin loading, git operations. These rely on the typecheck as a safety net.
+| Area / Subsystem | Test Files | What It Covers |
+|---|:---:|---|
+| **Session & Orchestration** | 14 suites | `toLLMEvents` stream adapter, turn loop, shell execution, command parsing, attachments, structured tools, doom-loop, overflow, compaction, reducer, subagent tabs, permission flows |
+| **Foxcode & Daemon** | 4 suites | Daemon schemas (Network/State/Status), background process schema & lifecycle, LSP binary SHA-256 validation, goal action classification |
+| **Tools & Sandbox** | 3 suites | MCP Docker `--rm` injection, sandbox filesystem & process policies, web search |
+| **Editing & Patching** | 3 suites | Patch parser, hunk applicator, heredocs, 8 replacer strategies, line ending & BOM normalization |
+| **Config & Compression** | 5 suites | Config precedence, JSONC merging, lossless tool token compression pipeline (path relativization, diff trimming, git rewriting, test filtering) |
+| **Standard Invariants** | 1 suite | 6 baseline categories: patch, edit, config, compress, memory, sandbox |
+| **Internal Packages** | 6 packages | `fox-memory` (167 tests), `sandbox` (61 tests), `core` (100+ tests), `http-recorder` (35 tests), `tui` (274 tests), `sqlite` (8 tests) |
 
-## What Is NOT Tested (use typecheck only)
+---
 
-Session/LLM orchestration, HTTP API server, MCP integration, plugin loading, git operations — no unit tests exist for these areas. Breaking changes here are caught by `bun run typecheck` only.
+## Integration Into Implementation Plans
+
+Every implementation plan's **Verification Plan** section MUST specify:
+1. **Tier 1 / Category tests** for the specific files modified.
+2. **Tier 3 Smoke test** (`bun run test:smoke`) during development iterations.
+3. **Typecheck** (`bun run typecheck`) with a scaled timeout (`timeout 45s`).
+4. **Tier 4 App tests** (`bun run test:app`) and **Tier 5 Full suite** (`bun run test`) before final sign-off.
