@@ -153,6 +153,11 @@ bun run test:app          # All app-level tests (test/)
 - `GitlabAuthPlugin` is a stub (local GitLab provider auth is via `GITLAB_TOKEN` env var).
 - External plugins loaded from `cfg.plugin_origins`; skip when `--pure` flag is set.
 
+### 7. Deferred Items & Scope Tracking (`.agents/rules/deferred-items-tracking.md`)
+- It is acceptable to defer non-critical scope, but deferred items must **never** be lost.
+- Any deferred capability in a walkthrough or implementation plan must be immediately reconciled into `fox-code-cli/docs/future/plan-competitive-features-roadmap.md` with explicit session traceability and an entry in the Master Deferred Items Traceability Ledger.
+- Partial feature delivery must be documented as partial, with the remaining scope scheduled in roadmap milestones.
+
 ---
 
 ## GitLab Local Testing Environment
