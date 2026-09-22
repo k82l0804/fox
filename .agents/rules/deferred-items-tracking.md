@@ -23,7 +23,7 @@ When deferring any capability or sub-task in an `implementation_plan.md` or `wal
 
 Deferred items must **not** remain stranded inside ephemeral session walkthroughs. At the conclusion of a session where items are deferred (or when reconciling plans):
 
-1. **Reconcile into Roadmap**: Ensure every deferred item is explicitly incorporated into [`fox-code-cli/docs/future/plan-competitive-features-roadmap.md`](file:///home/k82l0804/workarea/fox/fox-code-cli/docs/future/plan-competitive-features-roadmap.md) (or the corresponding future plan document).
+1. **Reconcile into Roadmap**: Ensure every deferred item is explicitly incorporated into [`fox-code-cli/docs/future/2026-09-21T06-12_plan-competitive-features-roadmap.md`](file:///home/k82l0804/workarea/fox/fox-code-cli/docs/future/2026-09-21T06-12_plan-competitive-features-roadmap.md) (or the corresponding future plan document).
 2. **Link the Originating Session**: The target blueprint must link directly to the originating walkthrough artifact (e.g., `[<session-id>](../../.gemini/antigravity-ide/brain/<session-id>/walkthrough.md)`).
 3. **Update the Traceability Ledger**: Add an entry into the **Master Deferred Items Traceability Ledger** table in the roadmap document specifying:
    - Deferred Item Name

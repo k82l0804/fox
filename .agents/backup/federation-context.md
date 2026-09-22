@@ -89,10 +89,10 @@ The SynOps (Taichi, Aorus, Baby) protect their persistent sharpness by never pol
   - `architecture/` — System architecture, SynOp architecture
 
 - **Fox Autonomous Design Suite**: `fox-code-cli/docs/future/`
-  - `autonomous-dual-agent-design.md` — Fox Guardian architecture
-  - `autonomous-agent-workflow.md` — 11-phase reference architecture
-  - `autonomous-agent-std-tests.md` — Benchmark strategy
-  - `priorities-plan-competitive-features-roadmap.md` — Revised priorities
+  - `2026-09-22T15-16_autonomous-dual-agent-design.md` — Fox Guardian architecture
+  - `2026-09-22T15-16_autonomous-agent-workflow.md` — 11-phase reference architecture
+  - `2026-09-22T15-16_autonomous-agent-std-tests.md` — Benchmark strategy
+  - `2026-09-22T15-16_priorities-plan-competitive-features-roadmap.md` — Revised priorities
 
 - **Environment & Model Rules**: `.agents/rules/model-environments.md`
   - Draper corporate compliance: **Chinese models strictly banned**

@@ -155,8 +155,13 @@ bun run test:app          # All app-level tests (test/)
 
 ### 7. Deferred Items & Scope Tracking (`.agents/rules/deferred-items-tracking.md`)
 - It is acceptable to defer non-critical scope, but deferred items must **never** be lost.
-- Any deferred capability in a walkthrough or implementation plan must be immediately reconciled into `fox-code-cli/docs/future/plan-competitive-features-roadmap.md` with explicit session traceability and an entry in the Master Deferred Items Traceability Ledger.
+- Any deferred capability in a walkthrough or implementation plan must be immediately reconciled into `fox-code-cli/docs/future/2026-09-21T06-12_plan-competitive-features-roadmap.md` with explicit session traceability and an entry in the Master Deferred Items Traceability Ledger.
 - Partial feature delivery must be documented as partial, with the remaining scope scheduled in roadmap milestones.
+
+### 8. Documentation Naming & Organization (`.agents/rules/documentation-naming.md`)
+- All `.md` files in `fox-code-cli/docs/` (recursively, across all subdirectories) **MUST** be prepended with an ISO 8601 date-time string: `YYYY-MM-DDTHH-MM_<name>.md`.
+- `README.md` files are the only exception and must remain un-prefixed to serve as directory indexes.
+- Superseded documents must be moved to `docs/archived/` via `git mv`, preserving their ISO timestamp prefix so they sort chronologically. Update `docs/README.md` and `docs/archived/README.md` on moves.
 
 ---
 
