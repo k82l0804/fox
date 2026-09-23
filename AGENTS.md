@@ -160,6 +160,7 @@ bun run test:app          # All app-level tests (test/)
 
 ### 8. Documentation Naming & Organization (`.agents/rules/documentation-naming.md`)
 - All `.md` files in `fox-code-cli/docs/` (recursively, across all subdirectories) **MUST** be prepended with an ISO 8601 date-time string: `YYYY-MM-DDTHH-MM_<name>.md`.
+- **Timestamp update on modification:** Any time an existing document is modified, its timestamp prefix **MUST** be updated to the current date and time (renaming the file via `git mv`), and all links to it updated across the workspace, so files sort by last-modified time and recency is evident.
 - `README.md` files are the only exception and must remain un-prefixed to serve as directory indexes.
 - Superseded documents must be moved to `docs/archived/` via `git mv`, preserving their ISO timestamp prefix so they sort chronologically. Update `docs/README.md` and `docs/archived/README.md` on moves.
 
