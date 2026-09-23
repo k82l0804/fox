@@ -1,6 +1,12 @@
-# Fox CLI Implementation Plan & Task List
+# Fox CLI Implementation Plan & Task List (SUPERSEDED / OBSOLETE)
 
-> Step-by-step engineering roadmap for implementing Fox Code CLI (`fox/fox-code-cli/`) based on the specifications in [`docs/specs/`](../specs/).
+> [!CAUTION]
+> ## ⚠️ OBSOLETE PRE-FORK DESIGN PLAN — DO NOT IMPLEMENT
+> **This document is preserved for historical reference only.**  
+> It was drafted prior to forking Kilo Code into `fox-code-cli/` and describes a speculative, greenfield Node.js/yargs implementation that was never adopted. Fox Code CLI is built on **Bun + Effect TS** with monorepo packages (`packages/core`, `packages/llm`, `packages/schema`, etc.).  
+>  
+> For the active, canonical architectural roadmap, milestones, and task ledgers, refer exclusively to:  
+> 👉 **[`fox-code-cli/docs/future/2026-09-21T06-12_plan-competitive-features-roadmap.md`](../../../fox-code-cli/docs/future/2026-09-21T06-12_plan-competitive-features-roadmap.md)**
 
 ---
 

@@ -1,9 +1,12 @@
 # 🥊 Why Fox? Competitive Landscape & Performance Comparison
 
-> **Document Version:** 1.0.0  
+> **Document Version:** 1.0.0 (Historical Summary)  
 > **Topic:** AI Coding Agent CLI Architectural & Performance Benchmark Comparison  
-> **Future Capabilities Plan:** [`../fox-code-cli/docs/future/plan-competitive-features-roadmap.md`](../fox-code-cli/docs/future/plan-competitive-features-roadmap.md)  
-> **Target Audience:** Developers, Enterprise Teams, AI Researchers, and Open-Source Contributors
+> **Active Competitive Reports:**
+> - [Fox vs Aider vs Goose: Capability-Proportional Execution](../fox-code-cli/docs/reports/2026-09-23T09-18_competitive-analysis-fox-aider-goose.md)
+> - [Aider vs Goose vs Kilo Code CLI: Competitor Benchmark Report](../fox-code-cli/docs/reports/2026-09-23T09-38_competitive-benchmark-aider-goose-kilo.md)
+> - [AI Coding Agent CLIs: Product Feature Analysis](../fox-code-cli/docs/reports/2026-09-23T10-07_competitive-analysis-product-features.md)
+> - [Master Roadmap & Capabilities Plan](../fox-code-cli/docs/future/2026-09-21T06-12_plan-competitive-features-roadmap.md)
 
 ---
 

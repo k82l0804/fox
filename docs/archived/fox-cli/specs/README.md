@@ -1,6 +1,11 @@
-# Fox CLI Specifications
+# Fox CLI Specifications (HISTORICAL / PRE-FORK SPECS)
 
-> Design specifications for **Fox CLI** — a lean, modular, local-first AI coding agent CLI and ACP server derived from Kilo Code CLI.
+> [!NOTE]
+> **Historical Archive Notice:**  
+> These specifications (Specs 01–07) reflect early pre-fork architectural planning. For current, active specifications, benchmarks, and architecture guides, consult:
+> - Active Docs Hub: [`fox-code-cli/docs/README.md`](../../../fox-code-cli/docs/README.md)
+> - Daemon Architecture: [`fox-code-cli/docs/2026-09-22T15-16_daemon-architecture.md`](../../../fox-code-cli/docs/2026-09-22T15-16_daemon-architecture.md)
+> - Master Roadmap & Blueprints: [`fox-code-cli/docs/future/2026-09-21T06-12_plan-competitive-features-roadmap.md`](../../../fox-code-cli/docs/future/2026-09-21T06-12_plan-competitive-features-roadmap.md)
 
 ---
 
