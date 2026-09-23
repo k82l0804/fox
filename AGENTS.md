@@ -155,7 +155,7 @@ bun run test:app          # All app-level tests (test/)
 
 ### 7. Deferred Items & Scope Tracking (`.agents/rules/deferred-items-tracking.md`)
 - It is acceptable to defer non-critical scope, but deferred items must **never** be lost.
-- Any deferred capability in a walkthrough or implementation plan must be immediately reconciled into **both** `fox-code-cli/docs/plans/*_master-plan.md` (phase assignment) and `fox-code-cli/docs/plans/*_deferred-items.md` (traceability entry) in the **same commit**.
+- Any deferred capability in a walkthrough or implementation plan must be immediately reconciled into the appropriate `fox-code-cli/docs/master-plan/` document (`current-tasks.md`, `future-tasks.md`, or `deferred-tasks.md`). Every task must be in exactly one of these documents.
 - Partial feature delivery must be documented as partial, with the remaining scope scheduled in roadmap milestones.
 
 ### 8. Documentation Naming & Organization (`.agents/rules/documentation-naming.md`)
